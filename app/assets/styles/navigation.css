@@ -4,8 +4,7 @@
     box-shadow: 0px 2px 4px 0px rgba(45, 59, 67, 0.05),
       0px 2px 6px 0px rgba(45, 59, 67, 0.06);
     padding: 1rem 1.5rem;
-    max-width: 1200px;
-    width: 100%;
+    width: 97%;
     position: fixed;
     top: 1rem;
     right: auto;
