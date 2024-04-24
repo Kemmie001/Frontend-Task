@@ -8,7 +8,6 @@ import SelectOptions from "./Select";
 import DateRange from "./DateRange";
 import moment from "moment";
 
-
 interface Props {
   openModal: boolean;
   setFilters: Dispatch<SetStateAction<any>>;
@@ -25,11 +24,9 @@ export default function FilterModal({
   const [transactionType, setTransactionType] = useState<Array<string>>([]);
   const [fromDate, setFromDate] = useState<any>("");
   const [toDate, setToDate] = useState<any>("");
-  const [selectedPeriod, setSelectedPeriod] = useState<any>(null)
-  const [startDate, setStartDate] = useState<any>(null)
-  const [endDate, setEndDate] = useState<any>(null)
-  
-
+  const [selectedPeriod, setSelectedPeriod] = useState<any>(null);
+  const [startDate, setStartDate] = useState<any>(null);
+  const [endDate, setEndDate] = useState<any>(null);
 
   const delayClose = (milli: number) => {
     setClosingModal(true);
@@ -49,11 +46,14 @@ export default function FilterModal({
     delayClose(600);
   };
   function startOf(unit: moment.unitOfTime.DurationConstructor) {
-    return () => moment().startOf(unit)
+    return () => moment().startOf(unit);
   }
-  
-  function timeAgo(amount: number, unit: moment.unitOfTime.DurationConstructor) {
-    return () => moment().subtract(amount, unit)
+
+  function timeAgo(
+    amount: number,
+    unit: moment.unitOfTime.DurationConstructor
+  ) {
+    return () => moment().subtract(amount, unit);
   }
 
   const periods = [
@@ -73,28 +73,27 @@ export default function FilterModal({
       label: "Last 3 months",
       startTime: timeAgo(3, "months"),
     },
-  ]
+  ];
 
   const togglePeriod = (period: (typeof periods)[number]) => {
     if (period.label === selectedPeriod) {
-      setFromDate(moment().toDate())
-      setStartDate(null)
+      setFromDate(moment().toDate());
+      setStartDate(null);
 
-      setToDate(moment().toDate())
-      setEndDate(null)
-      
-      setSelectedPeriod(null)
+      setToDate(moment().toDate());
+      setEndDate(null);
+
+      setSelectedPeriod(null);
     } else {
-      setFromDate(period.startTime().toDate())
-      setStartDate(period.startTime().toDate())
-      
-      setToDate(moment().toDate())
-      setEndDate(moment().toDate())
+      setFromDate(period.startTime().toDate());
+      setStartDate(period.startTime().toDate());
 
-      setSelectedPeriod(period.label)
+      setToDate(moment().toDate());
+      setEndDate(moment().toDate());
+
+      setSelectedPeriod(period.label);
     }
-  }
-
+  };
 
   const clearFilters = () => {
     setToDate("");
@@ -146,20 +145,20 @@ export default function FilterModal({
             </button>
           </div>
           <div className="flex gap-2 justify-between mb-7">
-          {periods.map((period) => (
-            <button
-              key={period.label}
-              onClick={() => togglePeriod(period)}
-              className={`font-medium text-sm  border rounded-full py-2 px-4 ${
-                selectedPeriod === period.label
-                  ? "bg-primary text-white"
-                  : "border-gray-50"
-              }`}
-            >
-              {period.label}
-            </button>
-          ))}
-        </div>
+            {periods.map((period) => (
+              <button
+                key={period.label}
+                onClick={() => togglePeriod(period)}
+                className={`font-medium text-sm  border rounded-full py-2 px-4 ${
+                  selectedPeriod === period.label
+                    ? "bg-primary text-white"
+                    : "border-gray-50"
+                }`}
+              >
+                {period.label}
+              </button>
+            ))}
+          </div>
           <div className="my-10 grow">
             <p className="font-semibold  mb-3">Date Range</p>
             <div className="flex justify-between gap-3">
@@ -168,11 +167,11 @@ export default function FilterModal({
                   value={fromDate}
                   onSelect={(value: any) => {
                     if (selectedPeriod) {
-                      setSelectedPeriod(null)
+                      setSelectedPeriod(null);
                     }
-    
-                    setStartDate(value)
-                    setFromDate(value)
+
+                    setStartDate(value);
+                    setFromDate(value);
                   }}
                 />
               </div>
@@ -182,11 +181,11 @@ export default function FilterModal({
                   value={toDate}
                   onSelect={(value: any) => {
                     if (selectedPeriod) {
-                        setSelectedPeriod(null)
+                      setSelectedPeriod(null);
                     }
-    
-                    setEndDate(value)
-                    setToDate(value)
+
+                    setEndDate(value);
+                    setToDate(value);
                   }}
                 />
               </div>
