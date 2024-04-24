@@ -136,7 +136,7 @@ export default function Revenue() {
                     className={
                       isLoading
                         ? "invisible"
-                        : "come-up text-primary text-3xl font-bold leading-10"
+                        : "text-primary text-3xl font-bold leading-10"
                     }
                   >
                     {formatAmount(wallet?.balance)}
@@ -174,7 +174,7 @@ export default function Revenue() {
           </div>
         </div>
         <div className="pt-16">
-          <div className="come-up gap-4 flex flex-col md:flex-row md:justify-between md:items-center border-b border-gray-50 pb-8 mb-14">
+          <div className="gap-4 flex flex-col md:flex-row md:justify-between md:items-center border-b border-gray-50 pb-8 mb-14">
             <div>
               <h3 className="text-primary font-bold text-xl leading-8">
                 {filteredTransactions?.length} Transactions
@@ -217,7 +217,7 @@ export default function Revenue() {
             </div>
           </div>
           {/* TRANSACTIONS RECIEPTS */}
-          <div className="come-up">
+          <div className="">
             {filteredTransactions?.length === 0 && !loadingTransactions && (
               <EmptyState clearFilters={clearFilters} />
             )}

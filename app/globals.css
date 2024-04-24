@@ -131,7 +131,7 @@ button:disabled {
   -moz-border-radius: 100px;
   -ms-border-radius: 100px;
   -o-border-radius: 100px;
-  background: #EFF1F6;
+  background: #eff1f6;
   color: #131316;
   font-size: 1rem;
   font-weight: 600;
@@ -143,14 +143,15 @@ button:disabled {
   transition: 0.2s;
 }
 .btn-secondary:hover {
-  color: #EFF1F6;
+  color: #eff1f6;
   background: #131316;
 }
 .btn-secondary:hover .icon {
-  filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(63deg) brightness(105%) contrast(102%);
+  filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%)
+    hue-rotate(63deg) brightness(105%) contrast(102%);
 }
-.reciept__icon{
-  background: linear-gradient(135deg, #DBDEE6 1.89%, #F6F7F9 98.77%);
+.reciept__icon {
+  background: linear-gradient(135deg, #dbdee6 1.89%, #f6f7f9 98.77%);
   border-radius: 16px;
   width: 48px;
   height: 48px;
@@ -159,6 +160,7 @@ button:disabled {
   align-items: center;
 }
 
-.recharts-wrapper, .recharts-surface {
+.recharts-wrapper,
+.recharts-surface {
   width: 100% !important;
 }

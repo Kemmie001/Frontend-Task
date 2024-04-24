@@ -19,7 +19,7 @@ export default function TransactionItem({
   date,
 }: Props) {
   return (
-    <div className="come-up flex justify-between mb-7">
+    <div className="flex justify-between mb-7">
       <div className="flex gap-2 md:gap-4">
         <div
           className={`${

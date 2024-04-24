@@ -31,7 +31,7 @@ export default function TransactionChart({ data }: { data: Array<any> }) {
   }, [data])
 
   return (
-    <div className='come-up'>
+    <div className=''>
       <Line
         datasetIdKey='id'
         options={{

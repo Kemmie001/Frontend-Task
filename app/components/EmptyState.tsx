@@ -15,7 +15,7 @@ export default function EmptyState({
   clearFilters
 }: Props) {
   return (
-    <div className='max-w-[370px] mx-auto my-4 w-full come-up'>
+    <div className='max-w-[370px] mx-auto my-4 w-full'>
       <div className="reciept__icon">
       <Image src={ReceiptIcon} alt="reciept icon" width={24} height={50} />
       </div>
