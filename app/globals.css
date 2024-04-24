@@ -154,8 +154,3 @@ button:disabled {
   justify-content: center;
   align-items: center;
 }
-
-.absolute.z-50.block.pt-2.top-10 {
-  right: 0;
-  top: 40px;
-}

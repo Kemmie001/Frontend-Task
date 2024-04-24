@@ -128,32 +128,26 @@ export default function FilterModal({
               Last 3 months
             </button>
           </div>
-          <div className="my-6 grow">
+          <div className="my-10 grow">
             <p className="font-semibold  mb-3">Date Range</p>
-            <div className="flex justify-between gap-[6px]">
-              <DateRange
-                value={fromDate}
-                onSelect={(value: any) => {
-                  // if (selectedPeriod) {
-                  //   onSelectPeriod(null)
-                  // }
+            <div className="flex justify-between gap-3">
+              <div className="from">
+                <DateRange
+                  value={fromDate}
+                  onSelect={(value: any) => {
+                    setFromDate(value);
+                  }}
+                />
+              </div>
 
-                  // onStartDate(value)
-                  setFromDate(value);
-                }}
-              />
-
-              <DateRange
-                value={toDate}
-                onSelect={(value: any) => {
-                  // if (selectedPeriod) {
-                  //   onSelectPeriod(null)
-                  // }
-
-                  // onEndDate(value)
-                  setToDate(value);
-                }}
-              />
+              <div className="to">
+                <DateRange
+                  value={toDate}
+                  onSelect={(value: any) => {
+                    setToDate(value);
+                  }}
+                />
+              </div>
             </div>
           </div>
           <div className="my-10">
