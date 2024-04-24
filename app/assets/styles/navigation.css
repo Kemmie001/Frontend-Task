@@ -1,0 +1,89 @@
+.nav__bar {
+    border-radius: 100px;
+    background: #fff;
+    box-shadow: 0px 2px 4px 0px rgba(45, 59, 67, 0.05),
+      0px 2px 6px 0px rgba(45, 59, 67, 0.06);
+    padding: 1rem 1.5rem;
+    max-width: 1200px;
+    width: 100%;
+    position: fixed;
+    top: 1rem;
+    right: auto;
+    left: auto;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 2;
+  }
+  .nav__bar > *:not(.nav__links) {
+    width: 200px;
+  }
+  .nav_auth__links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.25rem;
+  }
+  .nav__links {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .nav__links a {
+    padding: 0 1.15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 40px;
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -o-border-radius: 100px;
+    color: #56616b;
+    font-weight: 600;
+    transition: 0.3s;
+    line-height: 24px;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+    font-size: 1rem;
+  }
+  .nav_auth__links button {
+    height: 40px;
+    width: 40px;
+    min-width: 40px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav__links a:hover,
+  .nav_auth__links button:hover {
+    background: var(--light-grey);
+  }
+  .nav__links .active__link a {
+    background: #131316;
+    color: #fff;
+  }
+  .active__link .nav__icons {
+    /* background-color: green; */
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(63deg) brightness(105%) contrast(102%);
+  }
+  .nav_auth__links button:nth-last-child(1) {
+    background: #eff1f6;
+    width: 80px;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 4px;
+    padding-right: 12px;
+  }
+  .nav__user{
+    background: linear-gradient(139deg, #5c6670 2.33%, #131316 96.28%);
+  }

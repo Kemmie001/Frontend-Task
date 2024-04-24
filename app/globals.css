@@ -2,32 +2,163 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("../app/assets/styles/navigation.css");
+@import url("../app/assets/styles/modal.css");
+
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --grey: #eff1f6;
+  --light-grey: #eff1f680;
+  --grey-text: #56616b;
+}
+@font-face {
+  font-family: "Degular Display";
+  src: url("./assets/fonts/Degular-Medium.woff2");
+  src: url("./assets/fonts/Degular-Medium.woff2") format("embedded-opentype"),
+    url("./assets/fonts/Degular-Medium.woff2") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Degular Display";
+  src: url("./assets/fonts/Degular-Semibold.woff2");
+  src: url("./assets/fonts/Degular-Semibold.woff2") format("embedded-opentype"),
+    url("./assets/fonts/Degular-Semibold.woff2") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Degular Display";
+  src: url("./assets/fonts/Degular_Display-Bold.woff2");
+  src: url("./assets/fonts/Degular_Display-Bold.woff2")
+      format("embedded-opentype"),
+    url("./assets/fonts/Degular_Display-Bold.woff2") format("truetype");
+  font-weight: 700;
+  font-display: swap;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+* {
+  font-family: "Degular Display", "Inter", sans-serif;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  display: flex;
+  justify-content: center;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+main {
+  width: 100%;
+  padding: 120px 0;
+}
+.skeleton {
+  animation: skeleton-loading 1.3s linear infinite alternate;
+}
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 80%);
   }
+  100% {
+  }
+}
+
+button {
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+}
+
+button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.btn-primary {
+  height: 50px;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+  background: #131316;
+  color: #eff1f6;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  border: 2px solid #131316;
+}
+.btn-primary.outline {
+  border: 1px solid #eff1f6;
+  background: #ffffff;
+  color: #131316;
+}
+.btn-primary.chip {
+  border: 1px solid #eff1f6;
+  background: #ffffff;
+  color: #131316;
+  font-size: 0.875rem;
+  padding: 0 1rem;
+  height: 36px;
+  white-space: nowrap;
+}
+.btn-primary:hover {
+  background: #ffffff;
+  color: #131316;
+}
+.btn-primary.outline:hover {
+  background: #eff1f6;
+}
+.btn-primary.chip:hover {
+  background: #eff1f6;
+}
+.btn-primary.chip.active {
+  background: #131316;
+  color: #eff1f6;
+}
+
+.btn-secondary {
+  height: 50px;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+  background: #EFF1F6;
+  color: #131316;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 1.6rem;
+  transition: 0.2s;
+}
+.btn-secondary:hover {
+  color: #EFF1F6;
+  background: #131316;
+}
+.btn-secondary:hover .icon {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(63deg) brightness(105%) contrast(102%);
+}
+.reciept__icon{
+  background: linear-gradient(135deg, #DBDEE6 1.89%, #F6F7F9 98.77%);
+  border-radius: 16px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.recharts-wrapper, .recharts-surface {
+  width: 100% !important;
 }
