@@ -6,6 +6,8 @@ import close from "../assets/icons/close.svg";
 import Image from "next/image";
 import SelectOptions from "./Select";
 import DateRange from "./DateRange";
+import moment from "moment";
+
 
 interface Props {
   openModal: boolean;
@@ -21,9 +23,13 @@ export default function FilterModal({
   const [closingModal, setClosingModal] = useState(false);
   const [transactionStatus, setTransactionStatus] = useState<Array<string>>([]);
   const [transactionType, setTransactionType] = useState<Array<string>>([]);
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
-  const [dateRange, setDateRange] = useState(-1);
+  const [filterStartDate, setFilterStartDate] = useState<any>(new Date())
+  const [filterEndDate, setFilterEndDate] = useState<any>(new Date())
+  const [selectedPeriod, setSelectedPeriod] = useState<any>(null)
+  const [startDate, setStartDate] = useState<any>(null)
+  const [endDate, setEndDate] = useState<any>(null)
+  
+
 
   const delayClose = (milli: number) => {
     setClosingModal(true);
@@ -35,27 +41,64 @@ export default function FilterModal({
 
   const applyFilters = () => {
     setFilters({
-      fromDate,
-      toDate,
+      filterStartDate,
+      filterEndDate,
       transactionStatus,
       transactionType,
     });
     delayClose(600);
   };
+  function startOf(unit: moment.unitOfTime.DurationConstructor) {
+    return () => moment().startOf(unit)
+  }
+  
+  function timeAgo(amount: number, unit: moment.unitOfTime.DurationConstructor) {
+    return () => moment().subtract(amount, unit)
+  }
 
-  const selectDateRange = (daysDifference: number) => {
-    const todayDate = new Date();
-    const previousDate = new Date();
-    previousDate.setDate(todayDate.getDate() - daysDifference);
+  const periods = [
+    {
+      label: "Today",
+      startTime: startOf("day"),
+    },
+    {
+      label: "Last 7 days",
+      startTime: timeAgo(7, "days"),
+    },
+    {
+      label: "This month",
+      startTime: startOf("month"),
+    },
+    {
+      label: "Last 3 months",
+      startTime: timeAgo(3, "months"),
+    },
+  ]
 
-    setToDate(todayDate.toDateString());
-    setFromDate(previousDate.toDateString());
-    setDateRange(daysDifference);
-  };
+  const togglePeriod = (period: (typeof periods)[number]) => {
+    if (period.label === selectedPeriod) {
+      setFilterStartDate(moment().toDate())
+      setStartDate(null)
+
+      setFilterEndDate(moment().toDate())
+      setEndDate(null)
+      
+      setSelectedPeriod(null)
+    } else {
+      setFilterStartDate(period.startTime().toDate())
+      setStartDate(period.startTime().toDate())
+      
+      setFilterEndDate(moment().toDate())
+      setEndDate(moment().toDate())
+
+      setSelectedPeriod(period.label)
+    }
+  }
+
 
   const clearFilters = () => {
-    setToDate("");
-    setFromDate("");
+    setFilterStartDate("");
+    setFilterStartDate('');
     setTransactionStatus([]);
     setTransactionType([]);
     setFilters({});
@@ -102,49 +145,48 @@ export default function FilterModal({
               <Image src={close} alt="sent icon" width={20} height={20} />
             </button>
           </div>
-          <div className="flex justify-between">
+          <div className="flex gap-2 justify-between mb-7">
+          {periods.map((period) => (
             <button
-              className={`btn-primary chip ${dateRange === 0 ? "active" : ""}`}
-              onClick={() => selectDateRange(0)}
+              key={period.label}
+              onClick={() => togglePeriod(period)}
+              className={`font-medium text-sm  border rounded-full py-2 px-4 ${
+                selectedPeriod === period.label
+                  ? "bg-primary text-white"
+                  : "border-gray-50"
+              }`}
             >
-              Today
+              {period.label}
             </button>
-            <button
-              className={`btn-primary chip ${dateRange === 7 ? "active" : ""}`}
-              onClick={() => selectDateRange(7)}
-            >
-              Last 7 days
-            </button>
-            <button
-              className={`btn-primary chip ${dateRange === 30 ? "active" : ""}`}
-              onClick={() => selectDateRange(30)}
-            >
-              This month
-            </button>
-            <button
-              className={`btn-primary chip ${dateRange === 90 ? "active" : ""}`}
-              onClick={() => selectDateRange(90)}
-            >
-              Last 3 months
-            </button>
-          </div>
+          ))}
+        </div>
           <div className="my-10 grow">
             <p className="font-semibold  mb-3">Date Range</p>
             <div className="flex justify-between gap-3">
               <div className="from">
                 <DateRange
-                  value={fromDate}
+                  value={filterStartDate}
                   onSelect={(value: any) => {
-                    setFromDate(value);
+                    if (selectedPeriod) {
+                      setSelectedPeriod(null)
+                    }
+    
+                    setStartDate(value)
+                    setFilterStartDate(value)
                   }}
                 />
               </div>
 
               <div className="to">
                 <DateRange
-                  value={toDate}
+                  value={filterEndDate}
                   onSelect={(value: any) => {
-                    setToDate(value);
+                    if (selectedPeriod) {
+                        setSelectedPeriod(null)
+                    }
+    
+                    setEndDate(value)
+                    setFilterEndDate(value)
                   }}
                 />
               </div>
@@ -191,8 +233,8 @@ export default function FilterModal({
                 !(
                   transactionType.toString() ||
                   transactionStatus.toString() ||
-                  toDate ||
-                  fromDate
+                  filterEndDate ||
+                  filterStartDate
                 )
               }
               onClick={() => applyFilters()}
