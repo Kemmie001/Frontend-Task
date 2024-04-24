@@ -23,8 +23,8 @@ export default function FilterModal({
   const [closingModal, setClosingModal] = useState(false);
   const [transactionStatus, setTransactionStatus] = useState<Array<string>>([]);
   const [transactionType, setTransactionType] = useState<Array<string>>([]);
-  const [filterStartDate, setFilterStartDate] = useState<any>(new Date())
-  const [filterEndDate, setFilterEndDate] = useState<any>(new Date())
+  const [fromDate, setFromDate] = useState<any>("");
+  const [toDate, setToDate] = useState<any>("");
   const [selectedPeriod, setSelectedPeriod] = useState<any>(null)
   const [startDate, setStartDate] = useState<any>(null)
   const [endDate, setEndDate] = useState<any>(null)
@@ -41,8 +41,8 @@ export default function FilterModal({
 
   const applyFilters = () => {
     setFilters({
-      filterStartDate,
-      filterEndDate,
+      fromDate,
+      toDate,
       transactionStatus,
       transactionType,
     });
@@ -77,18 +77,18 @@ export default function FilterModal({
 
   const togglePeriod = (period: (typeof periods)[number]) => {
     if (period.label === selectedPeriod) {
-      setFilterStartDate(moment().toDate())
+      setFromDate(moment().toDate())
       setStartDate(null)
 
-      setFilterEndDate(moment().toDate())
+      setToDate(moment().toDate())
       setEndDate(null)
       
       setSelectedPeriod(null)
     } else {
-      setFilterStartDate(period.startTime().toDate())
+      setFromDate(period.startTime().toDate())
       setStartDate(period.startTime().toDate())
       
-      setFilterEndDate(moment().toDate())
+      setToDate(moment().toDate())
       setEndDate(moment().toDate())
 
       setSelectedPeriod(period.label)
@@ -97,8 +97,8 @@ export default function FilterModal({
 
 
   const clearFilters = () => {
-    setFilterStartDate("");
-    setFilterStartDate('');
+    setToDate("");
+    setFromDate("");
     setTransactionStatus([]);
     setTransactionType([]);
     setFilters({});
@@ -165,28 +165,28 @@ export default function FilterModal({
             <div className="flex justify-between gap-3">
               <div className="from">
                 <DateRange
-                  value={filterStartDate}
+                  value={fromDate}
                   onSelect={(value: any) => {
                     if (selectedPeriod) {
                       setSelectedPeriod(null)
                     }
     
                     setStartDate(value)
-                    setFilterStartDate(value)
+                    setFromDate(value)
                   }}
                 />
               </div>
 
               <div className="to">
                 <DateRange
-                  value={filterEndDate}
+                  value={toDate}
                   onSelect={(value: any) => {
                     if (selectedPeriod) {
                         setSelectedPeriod(null)
                     }
     
                     setEndDate(value)
-                    setFilterEndDate(value)
+                    setToDate(value)
                   }}
                 />
               </div>
@@ -233,8 +233,8 @@ export default function FilterModal({
                 !(
                   transactionType.toString() ||
                   transactionStatus.toString() ||
-                  filterEndDate ||
-                  filterStartDate
+                  toDate ||
+                  fromDate
                 )
               }
               onClick={() => applyFilters()}
