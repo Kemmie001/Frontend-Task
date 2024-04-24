@@ -1,17 +1,30 @@
-"use client"
-import { CategoryScale, Chart, LinearScale, PointElement, LineElement, Tooltip } from 'chart.js';
-import { useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
+"use client";
+import {
+  CategoryScale,
+  Chart,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Tooltip,
+} from "chart.js";
+import { useEffect, useState } from "react";
+import { Line } from "react-chartjs-2";
 
 export default function TransactionChart({ data }: { data: Array<any> }) {
-  Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip);
+  Chart.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Tooltip
+  );
 
-  const [chartData, setChartData] = useState<Array<any>>()
+  const [chartData, setChartData] = useState<Array<any>>();
 
   function compileTotalAmountByDate(transactions: Array<any>) {
     const totalAmountByDate: any = {};
 
-    transactions.forEach(transaction => {
+    transactions.forEach((transaction) => {
       const date = transaction.date;
 
       if (totalAmountByDate[date]) {
@@ -25,23 +38,23 @@ export default function TransactionChart({ data }: { data: Array<any> }) {
   }
 
   useEffect(() => {
-    const chartData = compileTotalAmountByDate(data)
-    setChartData(chartData)
-    console.log(chartData)
-  }, [data])
+    const chartData = compileTotalAmountByDate(data);
+    setChartData(chartData);
+    console.log(chartData);
+  }, [data]);
 
   return (
-    <div className=''>
+    <div className="">
       <Line
-        datasetIdKey='id'
+        datasetIdKey="id"
         options={{
           scales: {
             x: {
               grid: {
-                display: false
+                display: false,
               },
               ticks: {
-                display: true
+                display: true,
               },
             },
             y: {
@@ -50,38 +63,42 @@ export default function TransactionChart({ data }: { data: Array<any> }) {
               },
               suggestedMax: 80,
               ticks: {
-                display: false
+                display: false,
               },
               border: {
-                color: 'transparent'
-              }
-            }
+                color: "transparent",
+              },
+            },
           },
           plugins: {
-
             tooltip: {
               callbacks: {
                 label: function (context) {
-                    var label = context.dataset.label || '';
-                    label += 'USD ' + context.parsed.y;
-                    return label;
-                  }
-              }
-            }
-          }
+                  var label = context.dataset.label || "";
+                  label += "USD " + context.parsed.y;
+                  return label;
+                },
+              },
+            },
+          },
         }}
         data={{
-          labels: Object.keys(chartData ? chartData : {})?.map(date => new Date(date).toDateString().substring(4, 10)),
-          datasets: [{
-            data: Object.values(chartData ? chartData : {}),
-            fill: false,
-            tension: 0.5,
-            showLine: true,
-            borderColor: "#FF5403",
-            backgroundColor: "#FF5403",
-            borderWidth: 1
-          }]
-        }} />
+          labels: Object.keys(chartData ? chartData : {})?.map((date) =>
+            new Date(date).toDateString().substring(4, 10)
+          ),
+          datasets: [
+            {
+              data: Object.values(chartData ? chartData : {}),
+              fill: false,
+              tension: 0.5,
+              showLine: true,
+              borderColor: "#FF5403",
+              backgroundColor: "#FF5403",
+              borderWidth: 1,
+            },
+          ],
+        }}
+      />
     </div>
-  )
+  );
 }
