@@ -11,6 +11,7 @@ import TransactionItem from "../components/Transaction";
 import moment from "moment"
 import TransactionChart from "../components/TransactionChart";
 import FilterModal from "../components/FilterModal";
+import Sidebar from "../components/SideBar";
 
 export default function Revenue() {
   const [isLoading, setIsLoading] = useState(false);
@@ -122,11 +123,13 @@ export default function Revenue() {
   }, [filters]);
 
   return (
-    <section className="px-5 md:px-16 lg:px-20">
+    <section className="">
+       <Sidebar/>
+      <div className="ml-5 md:ml-10 mr-10 lg:ml-24 md:mr-20">
       <div>
-        <div className="flex flex-col md:flex-row  gap-5 md:gap-10 justify-between items-center w-full">
+        <div className="flex flex-col md:flex-row  gap-5 justify-between items-center w-full">
           <div className="w-full md:w-7/12">
-            <div className="flex items-center mb-10 gap-20">
+            <div className="flex items-center mb-10 gap-10">
               <div className="min-w-[220px]">
                 <p className="text-gray-400">Available Balance</p>
                 {isLoading ? (
@@ -216,7 +219,7 @@ export default function Revenue() {
               </div>
             </div>
           </div>
-          {/* TRANSACTIONS RECIEPTS */}
+          {/* Transaction reciepts */}
           <div className="">
             {filteredTransactions?.length === 0 && !loadingTransactions && (
               <EmptyState clearFilters={clearFilters} />
@@ -255,6 +258,8 @@ export default function Revenue() {
         </div>
       </div>
       <FilterModal openModal={filterModalOpen} setOpenModal={setFilterModalOpen} setFilters={setFilters} />
+      </div>
+
     </section>
   );
 }
