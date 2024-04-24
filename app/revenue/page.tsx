@@ -227,7 +227,7 @@ export default function Revenue() {
                 {[1, 2, 3, 4, 5, 6]?.map((index) => (
                   <div
                     key={index}
-                    className="my-0 py-0  h-16 w-full skeleton"
+                    className="my-4 h-16 skeleton"
                   ></div>
                 ))}
               </div>

@@ -5,11 +5,6 @@
 @import url("../app/assets/styles/navigation.css");
 @import url("../app/assets/styles/modal.css");
 
-:root {
-  --grey: #eff1f6;
-  --light-grey: #eff1f680;
-  --grey-text: #56616b;
-}
 @font-face {
   font-family: "Degular Display";
   src: url("./assets/fonts/Degular-Medium.woff2");
@@ -160,7 +155,7 @@ button:disabled {
   align-items: center;
 }
 
-.recharts-wrapper,
-.recharts-surface {
-  width: 100% !important;
+.absolute.z-50.block.pt-2.top-10 {
+  right: 0;
+  top: 40px;
 }
